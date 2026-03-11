@@ -2,9 +2,8 @@
   position: sticky;
   top: 60px;
   z-index: 110;
-
-  @media (max-width: 767px) {
-    position: static;
+  @media (max-width: 768px) {
+    top: 35px;
   }
 }
 

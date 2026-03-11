@@ -16,6 +16,23 @@ export default function MenuTabs({ data, dinnerItems, wineItems, cocktailItems }
     initSal()
   }, [activeId]);
 
+  useEffect(() => {
+    const el = menuNavRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isAbove = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        document.body.classList.toggle("menu-active", isAbove);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove("menu-active");
+    };
+  }, []);
+
   const handleSelect = useCallback((id) => {
     setActiveId(id);
     if (lenis && menuNavRef.current) {
