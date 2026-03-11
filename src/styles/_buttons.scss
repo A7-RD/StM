@@ -46,6 +46,19 @@
     }
 }
 
+.button-primary,
+.button-secondary {
+    &.rings-visible {
+        outline-color: #161817;
+        border-color: #161817;
+
+        &::before,
+        &::after {
+            opacity: 1;
+        }
+    }
+}
+
 .button-primary {
     border: 1px solid transparent;
 

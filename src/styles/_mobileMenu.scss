@@ -1,0 +1,51 @@
+.mobile-menu {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(245, 244, 241, 1);
+    z-index: 105;
+    padding: 35px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    &.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    &__logo {
+      align-self: center;
+    }
+
+    .center {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    &__nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      line-height: 120%;
+      letter-spacing: -1%;
+      text-transform: none;
+    }
+
+    &__footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}

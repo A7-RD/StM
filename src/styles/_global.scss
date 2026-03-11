@@ -188,6 +188,10 @@ div.bg-image,
   z-index: 2;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .m-hide {
   @media (max-width: 768px) {
     display: none;
