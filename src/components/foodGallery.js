@@ -14,6 +14,10 @@ export default function FoodGallery({ data }) {
         centeredSlides
         slidesPerView="auto"
         spaceBetween={67}
+        breakpoints={{
+          0: { spaceBetween: 20 },
+          769: { spaceBetween: 67 },
+        }}
         speed={650}
         className="food-gallery"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
