@@ -21,7 +21,7 @@ export default function ImageGallery({ data }) {
     >
       {data?.images?.map((item, i) => (
         <SwiperSlide key={i}>
-          <div className="ratio-4-5 m-ratio-5-3 pos-rel">
+          <div className="ratio-4-5 pos-rel">
             <Image
               className="bg-image"
               src={urlFor(item).url()}
