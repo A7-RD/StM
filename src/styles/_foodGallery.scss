@@ -28,7 +28,7 @@
   transform-origin: center center;
   transition: transform 0.65s ease;
 
-  .f-12 {
+  .f-14 {
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.65s ease, visibility 0.65s ease;
@@ -43,7 +43,7 @@
     cursor: grabbing;
   }
 
-  .f-12 {
+  .f-14 {
     visibility: visible;
     opacity: 1;
   }

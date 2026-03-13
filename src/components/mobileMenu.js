@@ -6,7 +6,7 @@ export default function MobileMenu({ isOpen, onClose, data }) {
     <div className={`mobile-menu${isOpen ? " is-open" : ""}`}>
       <div className="mobile-menu__logo">
         <Image
-          src="/images/mobile-logo.svg"
+          src="/images/mobile-logo.jpg"
           width={66}
           height={66}
           alt="St. Martins"

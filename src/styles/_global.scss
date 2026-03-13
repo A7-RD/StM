@@ -196,6 +196,10 @@ div.bg-image,
   object-fit: contain;
 }
 
+.hide {
+  display: none;
+}
+
 .m-hide {
   @media (max-width: 768px) {
     display: none;
@@ -296,6 +300,10 @@ div.bg-image,
   @media (max-width: 768px) {
     display: inherit;
   }
+}
+
+.pb-60px {
+  padding-bottom: 60px;
 }
 
 .m-mt-auto {

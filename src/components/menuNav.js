@@ -1,25 +1,30 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
-export default function MenuNav({ sections, activeId, onSelect, image, activeTitle }) {
+export default function MenuNav({ sections, activeId, onSelect }) {
   return (
     <>
-      {image && <MenuImage image={image} activeTitle={activeTitle} />}
+      <MenuImages sections={sections} activeId={activeId} />
       <MenuItems sections={sections} activeId={activeId} onSelect={onSelect} />
     </>
   );
 }
 
-function MenuImage({ image, activeTitle }) {
+function MenuImages({ sections, activeId }) {
   return (
     <div className="ratio-1-1 pos-rel w-200px mb-160 mx-auto m-mb-60">
-      <Image
-        className="bg-image contain"
-        src={urlFor(image).url()}
-        alt={activeTitle ?? ""}
-        width={193}
-        height={176}
-      />
+      {sections.map((s) =>
+        s.image ? (
+          <Image
+            key={s.id}
+            className={`bg-image contain${s.id === activeId ? "" : " hide"}`}
+            src={urlFor(s.image).url()}
+            alt={s.title ?? ""}
+            width={193}
+            height={176}
+          />
+        ) : null
+      )}
     </div>
   );
 }

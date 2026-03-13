@@ -50,7 +50,7 @@ export default function RestaurantHours({ hours }) {
         <div>{hours?.weekdays?.text}</div>
         <div>{hours?.weekend?.text}</div>
       </div>
-      <div className="capitalize f12 op-4">
+      <div className="capitalize op-4">
         {isOpen ? "Open Now" : "Closed Now"}
       </div>
     </div>

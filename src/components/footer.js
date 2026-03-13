@@ -23,16 +23,16 @@ export default function Footer({ data }) {
         <div className="flex flex-col align-center gap-20">
           <div className="flex flex-col align-center">
             <Link href={data?.phone?.link ?? ""}>{data?.phone?.text}</Link>
-            <Link href={data?.address?.link ?? ""}>{data?.address?.text}</Link>
+            <Link href={data?.address?.link ?? ""} target="_blank" rel="noopener noreferrer">{data?.address?.text}</Link>
           </div>
-          <Link className="lowercase" href={data?.handle?.link ?? ""}>{data?.handle?.text}</Link>
+          <Link className="lowercase" href={data?.handle?.link ?? ""} target="_blank" rel="noopener noreferrer">{data?.handle?.text}</Link>
         </div>
         <p className="tagline">{data?.tagline}</p>
       </div>
       {data?.image && (
         <div className="piano ratio-183-197 pos-rel w-180px m-order-1 m-mb60 m-mx-auto">
           <Image
-          className="bg-image"
+          className="bg-image contain"
             src={urlFor(data.image).url()}
             alt=""
             width={183}

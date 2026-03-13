@@ -54,7 +54,7 @@ export default function MenuTabs({ data, dinnerItems, wineItems, cocktailItems }
   return (
     <>
       <div className="h-125px" ref={menuNavRef} />
-      <MenuNav sections={sections} activeId={activeId} onSelect={handleSelect} image={active?.image} activeTitle={active?.title} />
+      <MenuNav sections={sections} activeId={activeId} onSelect={handleSelect} />
       {active && <MenuSection id={active.id} items={active.items} />}
     </>
   );

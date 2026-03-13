@@ -38,7 +38,7 @@ export default function FoodGallery({ data }) {
                     height={600}
                   />
                 </div>
-                <div className="f-12 text-center">
+                <div className="f-14 text-center">
                   <p className="op-4">{item.title}</p>
                   {item.ingredients && (
                     <p className="capitalize op-4">{item.ingredients}</p>

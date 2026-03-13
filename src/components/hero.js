@@ -13,7 +13,7 @@ export default function Hero({ data, headerData }) {
     >
       <ReservationButton data={headerData} />
       <HeroGraphic heroRef={heroRef} />
-      <div className="w-285px text-center flex flex-col align-center gap-40 m-mt-auto">
+      <div className="w-285px text-center flex flex-col align-center gap-40 m-mt-auto pb-60px">
         <p className="m-show">Make a Reservation</p>
         <p>{data?.statement}</p>
       </div>
