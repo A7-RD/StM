@@ -3,12 +3,12 @@ import { useState } from "react";
 import MobileToggle from "./mobileToggle";
 import MobileMenu from "./mobileMenu";
 
-export default function MobileNavClient({ data }) {
+export default function MobileNavClient({ data, phone }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <MobileToggle isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)} />
-      <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} data={data} />
+      <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} data={data} phone={phone} />
     </>
   );
 }

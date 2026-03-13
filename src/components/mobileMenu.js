@@ -1,12 +1,12 @@
 import Image from "next/image";
 import RestaurantHours from "./restaurantHours";
 
-export default function MobileMenu({ isOpen, onClose, data }) {
+export default function MobileMenu({ isOpen, onClose, data, phone }) {
   return (
     <div className={`mobile-menu${isOpen ? " is-open" : ""}`}>
       <div className="mobile-menu__logo">
         <Image
-          src="/images/mobile-logo.jpg"
+          src="/images/mobile-logo.png"
           width={66}
           height={66}
           alt="St. Martins"
@@ -29,6 +29,12 @@ export default function MobileMenu({ isOpen, onClose, data }) {
           href={data?.reservation?.link}
         >
           {data?.reservation?.button ?? "Make a Reservation"}
+        </a>
+        <a
+          className="button-secondary rings-visible text-center"
+          href={phone?.link}
+        >
+          {phone?.text}
         </a>
       </div>
       <div className="mobile-menu__footer">

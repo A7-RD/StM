@@ -9,7 +9,7 @@
     position: fixed;
     inset: 0;
     background-color: rgba(245, 244, 241, 1);
-    z-index: 105;
+    z-index: 150;
     padding: 35px;
     opacity: 0;
     pointer-events: none;
@@ -27,7 +27,12 @@
     .center {
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 40px;
+
+      .button-secondary + .button-secondary {
+        margin-top: -20px;
+      }
     }
 
     &__nav {
