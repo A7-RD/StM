@@ -82,7 +82,7 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
             <>
               <Swiper
                 slidesPerView={1}
-                speed={650}
+                speed={350}
                 effect="fade"
                 fadeEffect={{ crossFade: true }}
                 loop
