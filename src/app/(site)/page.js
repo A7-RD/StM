@@ -15,16 +15,17 @@ const PAGE_QUERY = `{
   "foodGallery": *[_type == "foodGallery"][0],
   "imageGallery": *[_type == "gallery"][0],
   "menus": *[_type == "menus"][0],
-  "footer": *[_type == "footer"][0]
+  "footer": *[_type == "footer"][0],
+  "wineMenu": *[_type == "wineMenu"][0]{ "fileUrl": menu.asset->url }
 }`;
 
-export const revalidate = 300; // revalidate every 5 minutes
+export const revalidate = 300;
 
 export default async function Home() {
-  const [{ data }, dinnerItems, wineItems, cocktailItems] = await Promise.all([
+  const [{ data }, dinnerItems, /* wineItems, */ cocktailItems] = await Promise.all([
     sanityFetch({ query: PAGE_QUERY }),
     getMenuItems("Dinner Menu"),
-    getMenuItems("Wine List"),
+    // getMenuItems("Wine List"),
     getMenuItems("Cocktails & Spirits"),
   ]);
 
@@ -35,7 +36,12 @@ export default async function Home() {
       <Spacer className="h-250px" />
       <FoodGallery data={data?.foodGallery} />
       <Spacer className="h-125px" />
-      <MenuTabs data={data?.menus} dinnerItems={dinnerItems} wineItems={wineItems} cocktailItems={cocktailItems} />
+      <MenuTabs
+        data={data?.menus}
+        dinnerItems={dinnerItems}
+        wineMenuUrl={data?.wineMenu?.fileUrl}
+        cocktailItems={cocktailItems}
+      />
       <MenuFooter warning={data?.menus?.warning} />
       <Spacer className="h-300px" />
       <ImageGallery data={data?.imageGallery} />

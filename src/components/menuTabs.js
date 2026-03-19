@@ -4,11 +4,16 @@ import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import MenuNav from "./menuNav";
 import MenuSection from "./menuSection";
+import dynamic from "next/dynamic";
+const WineMenuLightbox = dynamic(() => import("./wineMenuLightbox"), {
+  ssr: false,
+});
 import Spacer from "./spacer";
 import { initSal } from "@/utils/sal";
 
-export default function MenuTabs({ data, dinnerItems, wineItems, cocktailItems }) {
+export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems }) {
   const [activeId, setActiveId] = useState("dinner-menu");
+  const [wineLightboxOpen, setWineLightboxOpen] = useState(false);
   const menuNavRef = useRef(null);
   const lenis = useLenis();
 
@@ -35,6 +40,9 @@ export default function MenuTabs({ data, dinnerItems, wineItems, cocktailItems }
 
   const handleSelect = useCallback((id) => {
     setActiveId(id);
+    if (id === "wine-list") {
+      setWineLightboxOpen(true);
+    }
     if (lenis && menuNavRef.current) {
       lenis.scrollTo(menuNavRef.current, {
         duration: 1.2,
@@ -45,7 +53,7 @@ export default function MenuTabs({ data, dinnerItems, wineItems, cocktailItems }
 
   const sections = [
     { id: "dinner-menu", title: data?.dinner?.name ?? "Dinner Menu", items: dinnerItems, image: data?.dinner?.image },
-    { id: "wine-list", title: data?.wine?.name ?? "Wine List", items: wineItems, image: data?.wine?.image },
+    { id: "wine-list", title: data?.wine?.name ?? "Wine List", items: null, image: data?.wine?.image },
     { id: "cocktails-spirits", title: data?.cocktails?.name ?? "Cocktails & Spirits", items: cocktailItems, image: data?.cocktails?.image },
   ];
 
@@ -55,7 +63,8 @@ export default function MenuTabs({ data, dinnerItems, wineItems, cocktailItems }
     <>
       <div className="h-125px" ref={menuNavRef} />
       <MenuNav sections={sections} activeId={activeId} onSelect={handleSelect} />
-      {active && <MenuSection id={active.id} items={active.items} />}
+      {active && active.id !== "wine-list" && <MenuSection id={active.id} items={active.items} />}
+      <WineMenuLightbox pdfUrl={wineMenuUrl} isOpen={wineLightboxOpen} onClose={() => setWineLightboxOpen(false)} />
     </>
   );
 }
