@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, EffectFade, Thumbs } from "swiper/modules";
+import { EffectFade, Thumbs } from "swiper/modules";
 import { useLenis } from "lenis/react";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -50,17 +50,13 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const handleSlideClick = useCallback((e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     if (x < rect.width / 2) swiperRef.current?.slidePrev();
     else swiperRef.current?.slideNext();
-  }, []);
-
-  const onDocumentLoadSuccess = useCallback(({ numPages }) => {
-    setNumPages(numPages);
   }, []);
 
   if (!pdfUrl || !mounted) return null;
@@ -79,7 +75,7 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
       >
         <Document
           file={pdfUrl}
-          onLoadSuccess={onDocumentLoadSuccess}
+          onLoadSuccess={({ numPages }) => setNumPages(numPages)}
           className="wine-lightbox__document"
         >
           {numPages && (
@@ -89,6 +85,7 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
                 speed={650}
                 effect="fade"
                 fadeEffect={{ crossFade: true }}
+                loop
                 observer
                 observeParents
                 thumbs={{
@@ -97,10 +94,10 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
                       ? thumbsSwiper
                       : null,
                 }}
-                modules={[Pagination, EffectFade, Thumbs]}
+                modules={[EffectFade, Thumbs]}
                 className="wine-lightbox__swiper"
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
-                onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
               >
                 {Array.from({ length: numPages }, (_, i) => (
                   <SwiperSlide key={i}>
@@ -118,10 +115,7 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <Document
-                file={pdfUrl}
-                className="wine-lightbox__thumbs-doc"
-              >
+              <div className="wine-lightbox__thumbs-doc">
                 <Swiper
                   onSwiper={setThumbsSwiper}
                   slidesPerView={Math.min(numPages, 4)}
@@ -141,7 +135,7 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
                     </SwiperSlide>
                   ))}
                 </Swiper>
-              </Document>
+              </div>
               <div className="wine-lightbox__index">
                 {activeIndex + 1}/{numPages}
               </div>
