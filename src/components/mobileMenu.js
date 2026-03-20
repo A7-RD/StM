@@ -6,7 +6,7 @@ export default function MobileMenu({ isOpen, onClose, data, phone }) {
     <div className={`mobile-menu${isOpen ? " is-open" : ""}`}>
       <div className="mobile-menu__logo">
         <Image
-          src="/images/mobile-logo.png"
+          src="/images/mobile-logo.svg"
           width={66}
           height={66}
           alt="St. Martins"
@@ -14,15 +14,15 @@ export default function MobileMenu({ isOpen, onClose, data, phone }) {
       </div>
       <div className="center">
         <nav className="mobile-menu__nav">
-          <a onClick={onClose} href="#">
+          <a onClick={() => { onClose(); window.dispatchEvent(new CustomEvent('menu-navigate', { detail: { target: 'dinner-menu' } })); }} href="#">
             Dinner Menu
           </a>
-          <a onClick={onClose} href="#">
+          <a onClick={() => { onClose(); window.dispatchEvent(new CustomEvent('menu-navigate', { detail: { target: 'wine-list' } })); }} href="#">
             Wine List
           </a>
-          <a onClick={onClose} href="#">
+          {/* <a onClick={onClose} href="#">
             Cocktails &amp; Spirits
-          </a>
+          </a> */}
         </nav>
         <a
           className="button-secondary rings-visible"

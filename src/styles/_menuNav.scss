@@ -2,6 +2,10 @@
   mix-blend-mode: multiply;
 }
 
+.menu-container {
+  position: relative;
+}
+
 .menu-nav {
   position: sticky;
   top: 60px;

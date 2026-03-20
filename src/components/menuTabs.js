@@ -51,10 +51,16 @@ export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems
     }
   }, [lenis]);
 
+  useEffect(() => {
+    const onMenuNavigate = (e) => handleSelect(e.detail.target);
+    window.addEventListener('menu-navigate', onMenuNavigate);
+    return () => window.removeEventListener('menu-navigate', onMenuNavigate);
+  }, [handleSelect]);
+
   const sections = [
     { id: "dinner-menu", title: data?.dinner?.name ?? "Dinner Menu", items: dinnerItems, image: data?.dinner?.image },
     { id: "wine-list", title: data?.wine?.name ?? "Wine List", items: null, image: data?.wine?.image },
-    { id: "cocktails-spirits", title: data?.cocktails?.name ?? "Cocktails & Spirits", items: cocktailItems, image: data?.cocktails?.image },
+    // { id: "cocktails-spirits", title: data?.cocktails?.name ?? "Cocktails & Spirits", items: cocktailItems, image: data?.cocktails?.image },
   ];
 
   const active = sections.find((s) => s.id === activeId);
@@ -62,8 +68,10 @@ export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems
   return (
     <>
       <div className="h-125px" ref={menuNavRef} />
-      <MenuNav sections={sections} activeId={activeId} onSelect={handleSelect} />
-      {active && active.id !== "wine-list" && <MenuSection id={active.id} items={active.items} />}
+      <div className="menu-container">
+        <MenuNav sections={sections} activeId={activeId} onSelect={handleSelect} />
+        {active && active.id !== "wine-list" && <MenuSection id={active.id} items={active.items} />}
+      </div>
       <WineMenuLightbox pdfUrl={wineMenuUrl} isOpen={wineLightboxOpen} onClose={() => setWineLightboxOpen(false)} />
     </>
   );
