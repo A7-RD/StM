@@ -5,15 +5,13 @@ import gsap from "gsap";
 import MenuNav from "./menuNav";
 import MenuSection from "./menuSection";
 import dynamic from "next/dynamic";
-const WineMenuLightbox = dynamic(() => import("./wineMenuLightbox"), {
+const WineMenuInline = dynamic(() => import("./wineMenuInline"), {
   ssr: false,
 });
-import Spacer from "./spacer";
 import { initSal } from "@/utils/sal";
 
 export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems }) {
   const [activeId, setActiveId] = useState("dinner-menu");
-  const [wineLightboxOpen, setWineLightboxOpen] = useState(false);
   const menuNavRef = useRef(null);
   const lenis = useLenis();
 
@@ -40,9 +38,6 @@ export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems
 
   const handleSelect = useCallback((id) => {
     setActiveId(id);
-    if (id === "wine-list") {
-      setWineLightboxOpen(true);
-    }
     if (lenis && menuNavRef.current) {
       lenis.scrollTo(menuNavRef.current, {
         duration: 1.2,
@@ -71,8 +66,8 @@ export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems
       <div className="menu-container">
         <MenuNav sections={sections} activeId={activeId} onSelect={handleSelect} />
         {active && active.id !== "wine-list" && <MenuSection id={active.id} items={active.items} />}
+        {activeId === "wine-list" && <WineMenuInline pdfUrl={wineMenuUrl} />}
       </div>
-      <WineMenuLightbox pdfUrl={wineMenuUrl} isOpen={wineLightboxOpen} onClose={() => setWineLightboxOpen(false)} />
     </>
   );
 }

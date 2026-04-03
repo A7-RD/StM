@@ -19,12 +19,15 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
   const [mounted, setMounted] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loadError, setLoadError] = useState(null);
   const swiperRef = useRef(null);
   const lenis = useLenis();
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
+      setNumPages(null);
+      setLoadError(null);
       requestAnimationFrame(() =>
         requestAnimationFrame(() => setVisible(true)),
       );
@@ -34,7 +37,10 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
   }, [isOpen]);
 
   const handleTransitionEnd = useCallback(() => {
-    if (!visible) setMounted(false);
+    if (!visible) {
+      setMounted(false);
+      setNumPages(null);
+    }
   }, [visible]);
 
   useEffect(() => {
@@ -75,10 +81,19 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
       >
         <Document
           file={pdfUrl}
-          onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+          onLoadSuccess={({ numPages }) => {
+            setLoadError(null);
+            setNumPages(numPages);
+          }}
+          onLoadError={() => setLoadError("Could not load the wine list.")}
           className="wine-lightbox__document"
         >
-          {numPages && (
+          {loadError && (
+            <p className="wine-lightbox__error" role="alert">
+              {loadError}
+            </p>
+          )}
+          {numPages && !loadError && (
             <>
               <Swiper
                 slidesPerView={1}

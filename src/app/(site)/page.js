@@ -1,5 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/live";
-import { getMenuItems } from "@/lib/sheets";
+import { getMenuItems } from "@/lib/menuItems";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Spacer from "@/components/spacer";
@@ -29,6 +29,12 @@ export default async function Home() {
     getMenuItems("Cocktails & Spirits"),
   ]);
 
+  const wineFileUrl = data?.wineMenu?.fileUrl;
+  const wineMenuPdfSrc =
+    wineFileUrl != null
+      ? `/api/wine-menu-pdf?url=${encodeURIComponent(wineFileUrl)}`
+      : undefined;
+
   return (
     <main>
       <Header data={data?.header} />
@@ -39,7 +45,7 @@ export default async function Home() {
       <MenuTabs
         data={data?.menus}
         dinnerItems={dinnerItems}
-        wineMenuUrl={data?.wineMenu?.fileUrl}
+        wineMenuUrl={wineMenuPdfSrc}
         cocktailItems={cocktailItems}
       />
       <MenuFooter warning={data?.menus?.warning} />

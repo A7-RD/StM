@@ -2,9 +2,14 @@
   top: 0px;
   width: 100%;
   z-index: 100;
-  padding: 40px 60px 0 60px;
+  padding: 32px 40px 0 40px;
   position: fixed;
   left: 0px;
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 244, 241, 1) 0%,
+    rgba(245, 244, 241, 0) 100%
+  );
 
   @media (max-width: 768px) {
     padding: 35px 35px 0 35px;

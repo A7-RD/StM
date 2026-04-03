@@ -1,6 +1,25 @@
 # Google Sheets Setup
 
-This document explains how to connect your Google Sheet to the website so menu changes update automatically.
+## CSV files in the repo (no Google)
+
+If you do not use Google Sheets, edit the CSV files in **`data/menus/`**:
+
+| File | On the site |
+|------|-------------|
+| `dinner-menu.csv` | Dinner tab |
+| `cocktails-spirits.csv` | Cocktails & Spirits tab |
+
+**Columns** (first row is the header; order can change): `section`, `name`, `description`, `price`
+
+From **Excel**, use **Save As → CSV UTF-8**. Commit and deploy when you change menus.
+
+If a CSV file is **missing**, the app falls back to Google Sheets when those env vars are set (below).
+
+---
+
+## Google Sheets (optional)
+
+This section explains how to connect a Google Sheet so menu changes update without editing the repo.
 
 ---
 

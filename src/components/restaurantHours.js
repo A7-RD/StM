@@ -45,7 +45,7 @@ export default function RestaurantHours({ hours }) {
   }, [hours]);
 
   return (
-    <div className="flex flex-col align-center gap-5">
+    <div className="flex flex-col align-center">
       <div className="flex flex-col align-center m-flex-row m-gap-10 m-f14">
         <div>{hours?.weekdays?.text}</div>
         <div>{hours?.weekend?.text}</div>
