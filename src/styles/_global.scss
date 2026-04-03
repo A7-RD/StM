@@ -209,6 +209,12 @@ div.bg-image,
   }
 }
 
+.hide-desktop {
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
+
 .m-flex-col {
   @media (max-width: 768px) {
     flex-direction: column;
@@ -312,5 +318,25 @@ div.bg-image,
 .m-mt-auto {
   @media (max-width: 768px) {
     margin-top: auto;
+  }
+}
+
+/* Shared hours block: 14px / 20px line (4px rhythm); meta 12px / 16px */
+.restaurant-hours {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+
+  &__lines {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__status {
+    font-size: 12px;
+    line-height: 16px;
   }
 }

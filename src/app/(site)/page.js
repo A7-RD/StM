@@ -15,7 +15,10 @@ const PAGE_QUERY = `{
   "foodGallery": *[_type == "foodGallery"][0],
   "imageGallery": *[_type == "gallery"][0],
   "menus": *[_type == "menus"][0],
-  "footer": *[_type == "footer"][0],
+  "footer": *[_type == "footer"][0] {
+    ...,
+    "hours": coalesce(hours, *[_type == "header"][0].hours)
+  },
   "wineMenu": *[_type == "wineMenu"][0]{ "fileUrl": menu.asset->url }
 }`;
 
@@ -37,8 +40,8 @@ export default async function Home() {
 
   return (
     <main>
-      <Header data={data?.header} />
-      <Hero data={data?.hero} headerData={data?.header} />
+      <Header data={data?.header} footerData={data?.footer} />
+      <Hero data={data?.hero} />
       <Spacer className="h-250px" />
       <FoodGallery data={data?.foodGallery} />
       <Spacer className="h-125px" />

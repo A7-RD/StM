@@ -1,9 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import RestaurantHours from "./restaurantHours";
 
-export default function MobileMenu({ isOpen, onClose, data, phone }) {
+export default function MobileMenu({ isOpen, onClose, headerData, footerData }) {
   return (
     <div className={`mobile-menu${isOpen ? " is-open" : ""}`}>
+      {isOpen ? (
+        <button
+          type="button"
+          className="mobile-menu__close"
+          onClick={onClose}
+          aria-label="Close menu"
+        />
+      ) : null}
       <div className="mobile-menu__logo">
         <Image
           src="/images/mobile-logo.svg"
@@ -26,23 +36,23 @@ export default function MobileMenu({ isOpen, onClose, data, phone }) {
         </nav>
         <a
           className="button-secondary rings-visible"
-          href={data?.reservation?.link}
+          href={headerData?.reservation?.link}
         >
-          {data?.reservation?.button ?? "Make a Reservation"}
+          {headerData?.reservation?.button ?? "Make a Reservation"}
         </a>
         <a
           className="button-secondary rings-visible text-center"
-          href={phone?.link}
+          href={footerData?.phone?.link}
         >
-          {phone?.text}
+          {footerData?.phone?.text}
         </a>
       </div>
       <div className="mobile-menu__footer">
         <div className="flex gap-5 f-14">
-          <div>{data?.address?.street}</div>
-          <div>{data?.address?.cityState}</div>
+          <div>{footerData?.address?.street}</div>
+          <div>{footerData?.address?.cityState}</div>
         </div>
-        <RestaurantHours hours={data?.hours} />
+        <RestaurantHours hours={footerData?.hours} />
       </div>
     </div>
   );

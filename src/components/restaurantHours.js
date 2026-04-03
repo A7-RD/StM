@@ -2,6 +2,16 @@
 
 import { useEffect, useState } from "react";
 
+function hasDisplayableHours(hours) {
+  if (!hours) return false;
+  return Boolean(
+    hours.weekdays?.text ||
+      hours.weekend?.text ||
+      (Number.isFinite(hours.weekdays?.open) &&
+        Number.isFinite(hours.weekdays?.close)),
+  );
+}
+
 function isRestaurantOpenInDallas(hours) {
   const now = new Date();
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -31,7 +41,7 @@ function isRestaurantOpenInDallas(hours) {
   return timeInMinutes < closeSunThu;
 }
 
-export default function RestaurantHours({ hours }) {
+export default function RestaurantHours({ hours, className = "" }) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -44,8 +54,12 @@ export default function RestaurantHours({ hours }) {
     return () => clearInterval(id);
   }, [hours]);
 
+  if (!hasDisplayableHours(hours)) {
+    return null;
+  }
+
   return (
-    <div className="flex flex-col align-center">
+    <div className={`flex flex-col align-center${className ? ` ${className}` : ""}`}>
       <div className="flex flex-col align-center m-flex-row m-gap-10 m-f14">
         <div>{hours?.weekdays?.text}</div>
         <div>{hours?.weekend?.text}</div>

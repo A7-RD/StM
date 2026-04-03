@@ -13,21 +13,22 @@ import { initSal } from "@/utils/sal";
 export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems }) {
   const [activeId, setActiveId] = useState("dinner-menu");
   const menuNavRef = useRef(null);
+  const menuContainerRef = useRef(null);
   const lenis = useLenis();
 
   useEffect(() => {
     initSal()
   }, [activeId]);
 
+  /* Hide fixed reservation CTA while any part of the menu block is in view; show again above or below it */
   useEffect(() => {
-    const el = menuNavRef.current;
+    const el = menuContainerRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const isAbove = !entry.isIntersecting && entry.boundingClientRect.top < 0;
-        document.body.classList.toggle("menu-active", isAbove);
+        document.body.classList.toggle("menu-active", entry.isIntersecting);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
     observer.observe(el);
     return () => {
@@ -63,7 +64,7 @@ export default function MenuTabs({ data, dinnerItems, wineMenuUrl, cocktailItems
   return (
     <>
       <div className="h-125px" ref={menuNavRef} />
-      <div className="menu-container">
+      <div className="menu-container" ref={menuContainerRef}>
         <MenuNav sections={sections} activeId={activeId} onSelect={handleSelect} />
         {active && active.id !== "wine-list" && <MenuSection id={active.id} items={active.items} />}
         {activeId === "wine-list" && <WineMenuInline pdfUrl={wineMenuUrl} />}

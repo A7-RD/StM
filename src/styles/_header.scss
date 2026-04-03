@@ -2,34 +2,34 @@
   top: 0px;
   width: 100%;
   z-index: 100;
-  padding: 32px 40px 0 40px;
+  padding: 32px 40px;
   position: fixed;
   left: 0px;
+  box-sizing: border-box;
+  /* positioning context for .mobile-toggle (absolute, mobile) */
   background: linear-gradient(
     to bottom,
-    rgba(245, 244, 241, 1) 0%,
+    rgba(245, 244, 241, 1) 15%,
     rgba(245, 244, 241, 0) 100%
   );
 
   @media (max-width: 768px) {
-    padding: 35px 35px 0 35px;
+    padding: 32px;
   }
 }
 
-@media (max-width: 768px) {
-  .masthead-hours {
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
-
-  .menu-active .masthead-hours {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-
-.reservation-button {
+/* In-flow reservation (masthead) — matches Paper */
+.reservation-button--masthead.button-secondary {
+  position: relative;
   z-index: 110;
-  position: absolute;
-  top: 40px;
+  margin: 0;
+  padding: 4px 12px;
+  font-size: 16px;
+  transition: opacity 0.25s ease;
+}
+
+/* MenuTabs sets body.menu-active while .menu-container intersects the viewport */
+body.menu-active .reservation-button--masthead {
+  opacity: 0;
+  pointer-events: none;
 }

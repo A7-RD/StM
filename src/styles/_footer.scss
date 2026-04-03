@@ -1,19 +1,81 @@
 .footer {
-    padding: 0 40px 40px 40px;
+  padding: 0 40px 40px;
+
+  &__column {
+    @media (max-width: 768px) {
+      margin-top: 48px;
+    }
+  }
+
+  /* Primary column: one size, one line-height (14 / 20) */
+  &__primary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  &__contact a,
+  &__social {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Secondary line: 12 / 16; desktop spacing from space-between on column */
+  &__tagline {
+    margin-top: 0;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    opacity: 0.4;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    &__tagline {
+      margin-top: 24px;
+    }
+  }
 }
 
 .piano {
-    margin-top: 40px;
+  margin-top: 40px;
 
-    .bg-image {
-        mix-blend-mode: multiply;
-    }
+  .bg-image {
+    mix-blend-mode: multiply;
+  }
 }
 
-.tagline {
-    opacity: 0.4;
-    text-align: center;
-    @media (max-width: 768px) {
-    margin-top: 30px;
+.footer-hours {
+  align-items: flex-start;
+  text-align: left;
+  gap: 8px;
+
+  .restaurant-hours__lines {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 }
