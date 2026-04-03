@@ -4,8 +4,8 @@ export default function Footer({ data }) {
   return (
     <footer className="footer flex space-between m-flex-col">
       <div className="flex flex-col space-between capitalize m-order-2 m-mt50">
-        <div className="flex flex-col align-center gap-20">
-          <div className="flex flex-col align-center">
+        <div className="flex flex-col align-start gap-20">
+          <div className="flex flex-col align-start">
             <a href={data?.phone?.link ?? ""}>{data?.phone?.text}</a>
             <a href={data?.address?.link ?? ""} target="_blank" rel="noopener noreferrer">{data?.address?.text}</a>
           </div>

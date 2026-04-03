@@ -25,15 +25,21 @@ export default function WineMenuLightbox({ pdfUrl, isOpen, onClose }) {
 
   useEffect(() => {
     if (isOpen) {
-      setMounted(true);
-      setNumPages(null);
-      setLoadError(null);
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => setVisible(true)),
-      );
-    } else {
-      setVisible(false);
+      queueMicrotask(() => {
+        setMounted(true);
+        setNumPages(null);
+        setLoadError(null);
+      });
+      let innerRaf = 0;
+      const outerRaf = requestAnimationFrame(() => {
+        innerRaf = requestAnimationFrame(() => setVisible(true));
+      });
+      return () => {
+        cancelAnimationFrame(outerRaf);
+        cancelAnimationFrame(innerRaf);
+      };
     }
+    queueMicrotask(() => setVisible(false));
   }, [isOpen]);
 
   const handleTransitionEnd = useCallback(() => {
