@@ -73,6 +73,11 @@
   text-align: left;
   gap: 8px;
 
+  > .align-center {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
   .capitalize.op-4 {
     font-size: 14px;
   }
