@@ -22,8 +22,8 @@
 
     &__close {
       position: absolute;
-      top: 24px;
-      right: 24px;
+      top: 18px;
+      right: 16px;
       z-index: 2;
       width: 40px;
       height: 40px;
@@ -40,8 +40,8 @@
       &::before {
         content: "";
         display: block;
-        width: 17px;
-        height: 17px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         background-color: rgba(22, 24, 23, 1);
         flex-shrink: 0;

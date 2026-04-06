@@ -11,7 +11,7 @@ export default function Masthead({ headerData, footerData }) {
 
   return (
     <>
-      <div className="masthead flex justify-center align-start">
+      <div className="masthead flex justify-center align-center">
         <ReservationButton data={headerData} />
         <MobileToggle isOpen={menuOpen} onToggle={onToggle} />
       </div>

@@ -15,4 +15,9 @@
   @media (max-width: 768px) {
     position: relative;
   }
+
+  &__statement {
+    text-transform: none;
+    font-style: italic;
+  }
 }

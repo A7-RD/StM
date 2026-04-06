@@ -31,7 +31,7 @@ function MenuImages({ sections, activeId }) {
 
 function MenuItems({ sections, activeId, onSelect }) {
   return (
-    <div className="menu-nav w-100 flex justify-center capitalize flex gap-5 m-flex-col m-align-center m-gap-10">
+    <div className="menu-nav w-100 flex justify-center capitalize flex gap-5 m-align-center m-gap-10">
       {sections.map((s, i) => (
         <span key={s.id} className="flex gap-5">
           {i > 0 && <span className="cursor-default m-hide">/</span>}
