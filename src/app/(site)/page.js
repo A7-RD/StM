@@ -7,6 +7,7 @@ import FoodGallery from "@/components/foodGallery";
 import MenuTabs from "@/components/menuTabs";
 import MenuFooter from "@/components/menuFooter";
 import ImageGallery from "@/components/imageGallery";
+import PianoLiveSection from "@/components/pianoLiveSection";
 import Footer from "@/components/footer";
 
 const PAGE_QUERY = `{
@@ -54,7 +55,9 @@ export default async function Home() {
       <MenuFooter warning={data?.menus?.warning} />
       <Spacer className="h-300px" />
       <ImageGallery data={data?.imageGallery} />
-      <Spacer className="h-300px m-h-150px" />
+      <Spacer className="h-120px m-h-80px" />
+      <PianoLiveSection />
+      <Spacer className="h-120px m-h-80px" />
       <Footer data={data?.footer} />
     </main>
   );
