@@ -1,0 +1,587 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --font-display: "Galipos", ui-serif, Georgia, serif;
+  --font-mono: "XanhMono", ui-monospace, monospace;
+  --color-paper: #f5f4f1;
+  --color-ink: #161817;
+  --color-site-accent: #554d4d;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@font-face {
+  font-family: "Galipos";
+  src: url("/fonts/Galipos-Italic-btqdej.otf") format("opentype");
+  font-style: italic;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "XanhMono";
+  src: url("/fonts/XanhMono-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "XanhMono";
+  src: url("/fonts/XanhMono-Italic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: normal;
+}
+
+:root {
+  --background: #f5f4f1;
+  --foreground: #161817;
+  --card: #f5f4f1;
+  --card-foreground: #161817;
+  --popover: #f5f4f1;
+  --popover-foreground: #161817;
+  --primary: #161817;
+  --primary-foreground: #f5f4f1;
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: #161817;
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: #161817;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  a[href^="tel:"],
+  a[href^="sms:"] {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply overflow-x-clip font-sans;
+  }
+
+  body {
+    @apply bg-background font-mono text-foreground antialiased;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    width: 100vw;
+    overflow-x: clip;
+  }
+}
+
+@layer utilities {
+  @keyframes ring-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes piano-live-keys-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .fade--in {
+    opacity: 0;
+    transition: 0.65s ease opacity 0.2s;
+  }
+
+  .fade--in.sal-animate {
+    opacity: 1;
+  }
+
+  .delay-100 {
+    transition-delay: 0.4s;
+  }
+}
+
+/*
+ * Component-level rules below intentionally sit OUTSIDE @layer components so
+ * they win the CSS Cascade Layers contest against unlayered third-party
+ * stylesheets (notably Swiper). Selectors here are scoped enough that they
+ * will not fight Tailwind utility classes used on the same elements.
+ *
+ * BEM-style `__` in class names cannot be referenced through Tailwind v4
+ * arbitrary variants (e.g. `[&_.foo__bar]:flex-col`) because the `_` inside
+ * the brackets is parsed as a literal space. Any class that needs to be
+ * targeted via a parent arbitrary variant uses single-dash form instead
+ * (see `.restaurant-hours-lines` / `.restaurant-hours-status`).
+ */
+
+/* Hero tagline: matches legacy `.galipos` + `.hero__statement` (Galipos ss01, not body mono / serif fallback). */
+.hero-statement {
+  font-family: "Galipos", serif;
+  font-style: italic;
+  font-feature-settings: "ss01" 1;
+  font-size: 1rem;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+body.menu-active .reservation-button--masthead {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-rings {
+  position: relative;
+  outline: 1px solid transparent;
+  outline-offset: 3px;
+  transition: outline-color 0s 0.067s;
+}
+
+.btn-rings::before,
+.btn-rings::after {
+  content: "";
+  position: absolute;
+  border: 1px solid #161817;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.btn-rings::before {
+  inset: -9px;
+  border-radius: 29px;
+}
+
+.btn-rings::after {
+  inset: -13px;
+  border-radius: 33px;
+}
+
+.btn-rings:hover {
+  outline-color: #161817;
+}
+
+.btn-rings:hover::before {
+  animation: ring-in 0.05s 0.133s forwards;
+}
+
+.btn-rings:hover::after {
+  animation: ring-in 0.05s 0.2s forwards;
+}
+
+.btn-rings.rings-visible {
+  outline-color: #161817;
+  border-color: #161817;
+}
+
+.menu-item__header {
+  display: flex;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0.02em;
+}
+
+.menu-item__header::after {
+  content: "";
+  flex: 1;
+  order: 2;
+  background-image: radial-gradient(circle, #161817 1px, transparent 1px);
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+  background-position: 0 70%;
+  margin: 0 4px;
+}
+
+.menu-item__name {
+  order: 1;
+}
+
+.menu-item__price {
+  order: 3;
+}
+
+.image-gallery .swiper-pagination {
+  position: relative;
+  bottom: auto;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.image-gallery .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.image-gallery .swiper-pagination-bullet-active {
+  background: #554d4d;
+  box-shadow: none;
+}
+
+.wine-menu-inline__document {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wine-menu-inline__swiper {
+  width: min(700px, 90vw);
+  overflow: hidden;
+}
+
+.wine-menu-inline__slide {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wine-menu-inline__slide canvas {
+  display: block !important;
+  max-height: calc(100svh - 300px) !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+}
+
+.wine-menu-inline__thumbs-wrap .swiper-slide {
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.25s ease;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.wine-menu-inline__thumbs-wrap .swiper-slide canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.wine-menu-inline__thumbs-wrap .swiper-slide-thumb-active {
+  opacity: 1;
+  border-color: currentcolor;
+}
+
+@media (max-width: 768px) {
+  .wine-menu-inline__slide canvas {
+    max-height: calc(100svh - 180px) !important;
+  }
+}
+
+.wine-lightbox__swiper {
+  flex: 1;
+  min-height: 0;
+  width: 700px;
+  max-width: 90vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wine-lightbox__slide {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wine-lightbox__slide canvas {
+  display: block;
+  max-height: calc(90vh - 140px) !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 90vw !important;
+}
+
+.wine-lightbox__thumbs .swiper-slide {
+  cursor: pointer;
+  opacity: 0.5;
+  transition:
+    opacity 0.3s ease,
+    border-color 0.3s ease;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.wine-lightbox__thumbs .swiper-slide canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.wine-lightbox__thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .wine-lightbox__slide canvas {
+    max-height: calc(90vh - 80px) !important;
+  }
+}
+
+.ratio-1-1 .bg-image,
+.piano .bg-image {
+  mix-blend-mode: multiply;
+}
+
+.restaurant-hours {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+}
+
+.restaurant-hours-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.restaurant-hours-status {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.mobile-menu-close-dot::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #161817;
+  flex-shrink: 0;
+}
+
+/* Piano live keys — unlayered so max-width / masks beat Swiper and @layer ordering */
+.piano-live-section__keys-marquee {
+  overflow: hidden;
+  width: 100%;
+  max-width: 505px;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 32px,
+    #000 calc(100% - 32px),
+    transparent
+  );
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 32px,
+    #000 calc(100% - 32px),
+    transparent
+  );
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+}
+
+.piano-live-section__keys-track {
+  display: flex;
+  width: 200%;
+  animation: piano-live-keys-marquee 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .piano-live-section__keys-track {
+    animation: none;
+  }
+}
+
+.piano-live-section__keys-cell {
+  flex: 0 0 50%;
+  min-width: 0;
+}
+
+.piano-live-section__keys-cell + .piano-live-section__keys-cell {
+  margin-left: -1px;
+}
+
+.piano-live-section__keys-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+/* Food gallery Swiper: unlayered so these beat `swiper/css` (unlayered) — rules in
+   @layer components lose to unlayered imports regardless of specificity. */
+@media (max-width: 768px) {
+  .food-gallery {
+    overflow: visible;
+  }
+}
+
+.food-gallery .swiper-wrapper {
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .food-gallery .swiper-wrapper {
+    align-items: flex-start;
+  }
+}
+
+.food-gallery .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 350px;
+  transform: scale(0.8);
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 0.65s ease;
+}
+
+@media (max-width: 768px) {
+  .food-gallery .swiper-slide {
+    width: 283px;
+    transform: scale(1);
+  }
+}
+
+.food-gallery .swiper-slide .food-gallery-caption {
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.65s ease,
+    visibility 0.65s ease;
+}
+
+.food-gallery .swiper-slide-active {
+  transform: scale(1);
+  cursor: grab;
+}
+
+.food-gallery .swiper-slide-active:active {
+  cursor: grabbing;
+}
+
+.food-gallery .swiper-slide-active .food-gallery-caption {
+  visibility: visible;
+  opacity: 1;
+}
