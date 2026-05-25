@@ -8,7 +8,7 @@ export const metadata = {
   title: "St. Martins",
   description: "",
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/icon-stmartins.svg?v=2", type: "image/svg+xml" }],
   },
   formatDetection: {
     telephone: false,
