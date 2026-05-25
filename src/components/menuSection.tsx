@@ -25,7 +25,7 @@ export default function MenuSection({ id, items = [] }: MenuSectionProps) {
           <div key={sectionName} className="flex flex-col gap-5">
             {sectionName ? (
               <h3
-                className="fade--in flex justify-center pb-5 text-center font-display text-[44px] leading-none capitalize max-md:pb-[15px] max-md:text-[44px] md:text-[64px]"
+                className="ds-header fade--in flex justify-center pb-5 text-center capitalize max-md:pb-[15px]"
                 data-sal
               >
                 {sectionName}
@@ -34,11 +34,11 @@ export default function MenuSection({ id, items = [] }: MenuSectionProps) {
             {sectionItems.map((item, i) => (
               <div key={i} className="fade--in delay-100" data-sal>
                 <div className="menu-item__header">
-                  <span className="menu-item__name">{item.name}</span>
-                  <span className="menu-item__price">{item.price}</span>
+                  <span className="menu-item__name ds-title">{item.name}</span>
+                  <span className="menu-item__price ds-title">{item.price}</span>
                 </div>
                 {item.description ? (
-                  <p className="mt-0 max-w-[250px] text-base capitalize leading-[120%] tracking-[-0.01em] max-md:max-w-[250px] md:max-w-none">
+                  <p className="ds-text mt-0 max-w-[250px] max-md:max-w-[250px] md:max-w-none">
                     {item.description}
                   </p>
                 ) : null}

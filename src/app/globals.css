@@ -158,13 +158,96 @@
   }
 
   body {
-    @apply bg-background font-mono text-foreground antialiased;
-    font-size: 16px;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-    text-transform: uppercase;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-mono);
+    font-size: var(--type-text-size);
+    line-height: var(--type-text-leading);
+    letter-spacing: var(--type-text-tracking);
     width: 100vw;
     overflow-x: clip;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--type-header-size);
+    font-weight: 400;
+    line-height: var(--type-header-leading);
+  }
+}
+
+@layer utilities {
+  :root {
+    --type-header-size: clamp(3rem, 2.25rem + 2.5vw, 4rem);
+    --type-header-leading: 1;
+
+    --type-subhead-size: 1rem;
+    --type-subhead-leading: 1.4;
+
+    --type-title-size: 1rem;
+    --type-title-leading: 1.4;
+
+    --type-text-size: 1rem;
+    --type-text-leading: 1.4;
+    --type-text-tracking: -0.01em;
+
+    --type-text-small-size: 0.875rem;
+    --type-text-small-leading: 1.4;
+
+    --type-caption-size: 0.75rem;
+    --type-caption-leading: 1.4;
+  }
+
+  .ds-header {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--type-header-size);
+    font-weight: 400;
+    line-height: var(--type-header-leading);
+  }
+
+  .ds-subhead {
+    font-family: var(--font-mono);
+    font-size: var(--type-subhead-size);
+    font-weight: 400;
+    line-height: var(--type-subhead-leading);
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+  }
+
+  .ds-title {
+    font-family: var(--font-mono);
+    font-size: var(--type-title-size);
+    font-weight: 400;
+    line-height: var(--type-title-leading);
+    text-transform: uppercase;
+  }
+
+  .ds-text {
+    font-family: var(--font-mono);
+    font-size: var(--type-text-size);
+    font-weight: 400;
+    line-height: var(--type-text-leading);
+    letter-spacing: var(--type-text-tracking);
+  }
+
+  .ds-text-small {
+    font-family: var(--font-mono);
+    font-size: var(--type-text-small-size);
+    font-weight: 400;
+    line-height: var(--type-text-small-leading);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .ds-caption {
+    font-family: var(--font-mono);
+    font-style: italic;
+    font-size: var(--type-caption-size);
+    font-weight: 400;
+    line-height: var(--type-caption-leading);
   }
 }
 
@@ -214,15 +297,11 @@
  * (see `.restaurant-hours-lines` / `.restaurant-hours-status`).
  */
 
-/* Hero tagline: matches legacy `.galipos` + `.hero__statement` (Galipos ss01, not body mono / serif fallback). */
 .hero-statement {
-  font-family: "Galipos", serif;
-  font-style: italic;
-  font-feature-settings: "ss01" 1;
-  font-size: 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--type-text-size);
   line-height: 120%;
-  letter-spacing: -0.01em;
-  text-transform: none;
+  letter-spacing: var(--type-text-tracking);
 }
 
 body.menu-active .reservation-button--masthead {
@@ -275,19 +354,19 @@ body.menu-active .reservation-button--masthead {
 
 .menu-item__header {
   display: flex;
-  font-size: 18px;
-  line-height: 100%;
-  letter-spacing: 0.02em;
+  align-items: baseline;
 }
 
 .menu-item__header::after {
   content: "";
   flex: 1;
   order: 2;
+  align-self: center;
+  min-height: 1em;
   background-image: radial-gradient(circle, #161817 1px, transparent 1px);
   background-size: 10px 2px;
   background-repeat: repeat-x;
-  background-position: 0 70%;
+  background-position: 0 85%;
   margin: 0 4px;
 }
 
@@ -440,17 +519,59 @@ body.menu-active .reservation-button--masthead {
   }
 }
 
+.ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.contain {
+  object-fit: contain;
+}
+
 .ratio-1-1 .bg-image,
 .piano .bg-image {
   mix-blend-mode: multiply;
 }
 
+.menu-container {
+  position: relative;
+}
+
+.menu-nav-tab {
+  position: relative;
+}
+
+.menu-nav-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  opacity: 1;
+}
+
+.menu-nav-tab:hover::after,
+.menu-nav-tab[data-active]::after {
+  transform: scaleX(1);
+}
+
 .restaurant-hours {
   display: flex;
   flex-direction: column;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: -0.01em;
+  font-size: var(--type-text-small-size);
+  line-height: var(--type-text-small-leading);
+  letter-spacing: var(--type-text-tracking);
 }
 
 .restaurant-hours-lines {
@@ -460,8 +581,8 @@ body.menu-active .reservation-button--masthead {
 }
 
 .restaurant-hours-status {
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-leading);
 }
 
 .mobile-menu-close-dot::before {
@@ -546,20 +667,27 @@ body.menu-active .reservation-button--masthead {
 }
 
 .food-gallery .swiper-slide {
+  width: 420px;
+  cursor: pointer;
+}
+
+.food-gallery .food-gallery-slide-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  width: 350px;
+  width: 100%;
   transform: scale(0.8);
-  cursor: pointer;
   transform-origin: center center;
   transition: transform 0.65s ease;
 }
 
 @media (max-width: 768px) {
   .food-gallery .swiper-slide {
-    width: 283px;
+    width: 312px;
+  }
+
+  .food-gallery .food-gallery-slide-inner {
     transform: scale(1);
   }
 }
@@ -573,8 +701,11 @@ body.menu-active .reservation-button--masthead {
 }
 
 .food-gallery .swiper-slide-active {
-  transform: scale(1);
   cursor: grab;
+}
+
+.food-gallery .swiper-slide-active .food-gallery-slide-inner {
+  transform: scale(1);
 }
 
 .food-gallery .swiper-slide-active:active {

@@ -21,7 +21,7 @@ export default function FoodGallery({ data }: FoodGalleryProps) {
   const swiperRef = useRef<SwiperType | null>(null)
 
   return (
-    <div className="h-[500px]">
+    <div className="h-[480px] overflow-hidden md:h-[640px]">
       <Swiper
         loop
         centeredSlides
@@ -40,7 +40,7 @@ export default function FoodGallery({ data }: FoodGalleryProps) {
         {data?.images?.map((item, i) => (
           <SwiperSlide key={i}>
             {({ isActive }) => (
-              <>
+              <div className="food-gallery-slide-inner">
                 <div
                   className="relative aspect-[4/5] w-full cursor-pointer"
                   onClick={() =>
@@ -59,13 +59,13 @@ export default function FoodGallery({ data }: FoodGalleryProps) {
                     />
                   ) : null}
                 </div>
-                <div className="food-gallery-caption text-center text-sm leading-[100%] tracking-[-0.01em]">
+                <div className="food-gallery-caption ds-text-small text-center normal-case leading-[100%] tracking-[-0.01em]">
                   <p className="opacity-40">{item.title}</p>
                   {item.ingredients ? (
                     <p className="capitalize opacity-40">{item.ingredients}</p>
                   ) : null}
                 </div>
-              </>
+              </div>
             )}
           </SwiperSlide>
         ))}

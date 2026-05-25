@@ -33,7 +33,7 @@ function FooterAddress({ address }: { address?: Address }) {
     if (href) {
       return (
         <a
-          className="flex flex-col items-start gap-1 text-sm leading-5 tracking-[-0.01em] no-underline text-inherit"
+          className="ds-text-small flex flex-col items-start gap-1 normal-case tracking-[-0.01em] no-underline text-inherit"
           href={href}
           target="_blank"
           rel="noopener noreferrer"
@@ -43,7 +43,7 @@ function FooterAddress({ address }: { address?: Address }) {
       )
     }
     return (
-      <div className="flex flex-col items-start gap-1 text-sm leading-5 tracking-[-0.01em]">
+      <div className="ds-text-small flex flex-col items-start gap-1 normal-case tracking-[-0.01em]">
         {inner}
       </div>
     )
@@ -52,7 +52,7 @@ function FooterAddress({ address }: { address?: Address }) {
   if (address?.text) {
     return (
       <a
-        className="flex flex-col items-start gap-1 text-sm leading-5 tracking-[-0.01em] no-underline text-inherit"
+        className="ds-text-small flex flex-col items-start gap-1 normal-case tracking-[-0.01em] no-underline text-inherit"
         href={href}
         target="_blank"
         rel="noopener noreferrer"
@@ -72,7 +72,7 @@ export default function Footer({ data }: { data?: FooterData }) {
         <div className="flex flex-col items-start gap-4">
           <div className="flex flex-col items-start gap-1">
             <a
-              className="text-sm leading-5 tracking-[-0.01em] no-underline text-inherit"
+              className="ds-text-small normal-case tracking-[-0.01em] no-underline text-inherit"
               href={data?.phone?.link ?? ""}
             >
               {data?.phone?.text}
@@ -84,7 +84,7 @@ export default function Footer({ data }: { data?: FooterData }) {
             className="items-start gap-2 text-left [&_.restaurant-hours-lines]:flex-col [&_.restaurant-hours-lines]:items-start [&_.restaurant-hours-lines]:gap-1 [&_.restaurant-hours-status]:text-sm"
           />
           <a
-            className="text-sm leading-5 tracking-[-0.01em] lowercase no-underline text-inherit"
+            className="ds-text-small lowercase tracking-[-0.01em] no-underline text-inherit"
             href={data?.handle?.link ?? ""}
             target="_blank"
             rel="noopener noreferrer"
@@ -92,7 +92,7 @@ export default function Footer({ data }: { data?: FooterData }) {
             {data?.handle?.text}
           </a>
         </div>
-        <p className="mt-0 text-left text-xs leading-4 tracking-[-0.01em] opacity-40 max-md:mt-6">
+        <p className="ds-caption mt-0 text-left not-italic tracking-[-0.01em] opacity-40 max-md:mt-6">
           {data?.tagline}
         </p>
       </div>

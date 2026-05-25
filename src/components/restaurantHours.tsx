@@ -75,12 +75,9 @@ export default function RestaurantHours({
 
   return (
     <div
-      className={cn(
-        "restaurant-hours flex flex-col items-center text-sm leading-5 tracking-[-0.01em]",
-        className,
-      )}
+      className={cn("restaurant-hours items-center", className)}
     >
-      <div className="restaurant-hours-lines flex flex-col gap-1 max-md:flex-row max-md:flex-wrap max-md:gap-2.5 max-md:text-sm">
+      <div className="restaurant-hours-lines flex-col gap-1 max-md:flex-row max-md:flex-wrap max-md:gap-2.5">
         <div>{hours?.weekdays?.text}</div>
         <div>{hours?.weekend?.text}</div>
       </div>

@@ -63,7 +63,7 @@ export default function WineMenuLightbox({
       <DialogContent
         showCloseButton={false}
         overlayClassName="fixed inset-0 isolate z-50 bg-black/85 backdrop-blur-none"
-        className="fixed top-1/2 left-1/2 z-50 flex max-h-[90vh] w-full max-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-8 rounded-none border-0 bg-transparent p-0 text-sm text-white shadow-none ring-0"
+        className="fixed top-1/2 left-1/2 z-50 flex max-h-[90vh] w-full max-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-8 rounded-none border-0 bg-transparent p-0 text-white shadow-none ring-0"
       >
         <DialogTitle className="sr-only">Wine list</DialogTitle>
         <Button
@@ -85,7 +85,7 @@ export default function WineMenuLightbox({
         >
           {loadError ? (
             <p
-              className="m-0 max-w-md p-4 text-center text-base leading-normal text-white/90"
+              className="ds-text m-0 max-w-md p-4 text-center text-white/90"
               role="alert"
             >
               {loadError}
@@ -151,7 +151,7 @@ export default function WineMenuLightbox({
                   ))}
                 </Swiper>
               </div>
-              <div className="mt-3 text-center text-sm tracking-[0.05em] text-white/70 max-md:mt-4">
+              <div className="ds-text-small mt-3 text-center normal-case tracking-[0.05em] text-white/70 max-md:mt-4">
                 {activeIndex + 1}/{numPages}
               </div>
             </>

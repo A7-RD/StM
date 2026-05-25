@@ -71,7 +71,7 @@ export default function MobileMenu({
           />
         </div>
         <div className="flex flex-col items-center gap-10">
-          <nav className="flex flex-col items-center gap-2.5 text-xl leading-[120%] tracking-[-0.01em] normal-case">
+          <nav className="ds-text flex flex-col items-center gap-2.5 text-xl leading-[120%]">
             <button
               type="button"
               className="cursor-pointer border-0 bg-transparent p-0 font-inherit text-inherit"
@@ -90,7 +90,6 @@ export default function MobileMenu({
           <Button
             variant="reservation"
             nativeButton={false}
-            className="btn-rings rings-visible"
             render={
               <a
                 href={headerData?.reservation?.link ?? "#"}
@@ -103,14 +102,14 @@ export default function MobileMenu({
           <Button
             variant="reservation"
             nativeButton={false}
-            className="btn-rings rings-visible -mt-5"
+            className="-mt-5"
             render={<a href={footerData?.phone?.link ?? "#"} className="text-center" />}
           >
             {footerData?.phone?.text}
           </Button>
         </div>
         <div className="flex flex-col items-center gap-3 text-center">
-          <div className="flex gap-1.5 text-sm leading-5">
+          <div className="ds-text-small flex gap-1.5 normal-case">
             <div>{footerData?.address?.street}</div>
             <div>{footerData?.address?.cityState}</div>
           </div>

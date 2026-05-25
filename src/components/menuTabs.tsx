@@ -6,7 +6,7 @@ import { useLenis } from "lenis/react"
 import gsap from "gsap"
 
 import { Tabs, TabsContent } from "@/components/ui/tabs"
-import MenuNav, { type MenuSectionMeta } from "./menuNav"
+import MenuNav, { MenuImages, type MenuSectionMeta } from "./menuNav"
 import MenuSection from "./menuSection"
 import { initSal } from "@/utils/sal"
 
@@ -102,11 +102,12 @@ export default function MenuTabs({
   ]
 
   return (
-    <div className="relative z-[2]">
+    <>
       <div className="h-[125px]" ref={menuNavRef} />
-      <div className="relative" ref={menuContainerRef}>
+      <div className="menu-container relative" ref={menuContainerRef}>
+        <MenuImages sections={sections} activeId={activeId} />
         <Tabs value={activeId} onValueChange={handleSelect}>
-          <MenuNav sections={sections} activeId={activeId} />
+          <MenuNav sections={sections} />
           <TabsContent value="dinner-menu" className="mt-0 outline-none">
             <MenuSection id="dinner-menu" items={dinnerItems} />
           </TabsContent>
@@ -115,6 +116,6 @@ export default function MenuTabs({
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </>
   )
 }

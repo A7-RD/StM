@@ -49,7 +49,7 @@ export default function WineMenuInline({ pdfUrl }: WineMenuInlineProps) {
         className="wine-menu-inline__document"
       >
         {loadError ? (
-          <p className="m-0 max-w-md p-4 text-center text-base leading-normal" role="alert">
+          <p className="ds-text m-0 max-w-md p-4 text-center" role="alert">
             {loadError}
           </p>
         ) : null}
@@ -111,7 +111,7 @@ export default function WineMenuInline({ pdfUrl }: WineMenuInlineProps) {
                 ))}
               </Swiper>
             </div>
-            <div className="mt-3 text-center text-sm tracking-[0.05em] opacity-60 max-md:mt-4">
+            <div className="ds-text-small mt-3 text-center normal-case tracking-[0.05em] opacity-60 max-md:mt-4">
               {activeIndex + 1}/{numPages}
             </div>
           </>
