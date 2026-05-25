@@ -55,7 +55,7 @@ type RestaurantHoursProps = {
 
 export default function RestaurantHours({
   hours,
-  className = "",
+  className,
 }: RestaurantHoursProps) {
   const [isOpen, setIsOpen] = useState(false)
 

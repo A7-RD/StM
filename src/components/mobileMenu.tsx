@@ -13,6 +13,9 @@ import { Button } from "@/components/ui/button"
 import RestaurantHours, { type HoursBlock } from "./restaurantHours"
 import { cn } from "@/lib/utils"
 
+const navLinkClass =
+  "cursor-pointer border-0 bg-transparent p-0 font-inherit text-inherit"
+
 type MobileMenuProps = {
   isOpen: boolean
   onClose: () => void
@@ -73,14 +76,14 @@ export default function MobileMenu({
           <nav className="ds-text flex flex-col items-center gap-2.5 text-xl leading-[120%]">
             <button
               type="button"
-              className="cursor-pointer border-0 bg-transparent p-0 font-inherit text-inherit"
+              className={navLinkClass}
               onClick={() => navigate("dinner-menu")}
             >
               Dinner Menu
             </button>
             <button
               type="button"
-              className="cursor-pointer border-0 bg-transparent p-0 font-inherit text-inherit"
+              className={navLinkClass}
               onClick={() => navigate("wine-list")}
             >
               Wine List

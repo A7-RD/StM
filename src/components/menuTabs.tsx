@@ -24,7 +24,6 @@ type MenuItemRow = {
 type MenusData = {
   dinner?: { name?: string; image?: unknown }
   wine?: { name?: string; image?: unknown }
-  cocktails?: { name?: string; image?: unknown }
   warning?: string
 }
 
@@ -32,7 +31,6 @@ type MenuTabsProps = {
   data?: MenusData
   dinnerItems: MenuItemRow[]
   wineMenuUrl?: string
-  cocktailItems?: MenuItemRow[]
 }
 
 export default function MenuTabs({
