@@ -53,7 +53,6 @@ export default function MobileMenu({
       >
         <DialogTitle className="sr-only">Site menu</DialogTitle>
         <DialogClose
-          nativeButton={false}
           render={
             <button
               type="button"

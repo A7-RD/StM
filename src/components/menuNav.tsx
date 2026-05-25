@@ -56,6 +56,7 @@ export default function MenuNav({ sections }: { sections: MenuSectionMeta[] }) {
               </span>
             ) : null}
             <TabsTrigger
+              id={`menu-tab-${s.id}`}
               value={s.id}
               className={cn(
                 "ds-text menu-nav-tab flex-none rounded-none border-0 bg-transparent px-0 py-0 text-ink shadow-none",

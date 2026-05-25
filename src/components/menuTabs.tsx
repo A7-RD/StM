@@ -108,10 +108,18 @@ export default function MenuTabs({
         <MenuImages sections={sections} activeId={activeId} />
         <Tabs value={activeId} onValueChange={handleSelect}>
           <MenuNav sections={sections} />
-          <TabsContent value="dinner-menu" className="mt-0 outline-none">
+          <TabsContent
+            id="menu-panel-dinner-menu"
+            value="dinner-menu"
+            className="mt-0 outline-none"
+          >
             <MenuSection id="dinner-menu" items={dinnerItems} />
           </TabsContent>
-          <TabsContent value="wine-list" className="mt-0 outline-none">
+          <TabsContent
+            id="menu-panel-wine-list"
+            value="wine-list"
+            className="mt-0 outline-none"
+          >
             <WineMenuInline pdfUrl={wineMenuUrl} />
           </TabsContent>
         </Tabs>
