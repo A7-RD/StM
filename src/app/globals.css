@@ -282,6 +282,15 @@
   .delay-100 {
     transition-delay: 0.4s;
   }
+
+  .happy-hour-menu .fade--in {
+    transition: 0.4s ease opacity;
+    transition-delay: calc(var(--sal-order, 0) * 0.18s);
+  }
+
+  .happy-hour-menu.sal-animate .fade--in {
+    opacity: 1;
+  }
 }
 
 /*

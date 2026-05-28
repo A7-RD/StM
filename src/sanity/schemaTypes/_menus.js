@@ -22,6 +22,15 @@ export const menus = defineType({
       ],
     }),
     defineField({
+      name: "happyHour",
+      title: "Happy Hour",
+      type: "object",
+      fields: [
+        defineField({ name: "name", title: "Name", type: "string", initialValue: "Happy Hour" }),
+        defineField({ name: "image", title: "Image / GIF", type: "image", options: { hotspot: true } }),
+      ],
+    }),
+    defineField({
       name: "cocktails",
       type: "object",
       fields: [

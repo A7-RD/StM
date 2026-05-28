@@ -30,7 +30,7 @@ export default function PianoLiveSection() {
             </p>
             <p className="ds-title m-0">Alexis Lugo</p>
           </div>
-          <div className="flex min-w-0 flex-1 flex-col items-center justify-start gap-2 max-md:text-center">
+          <div className="flex min-w-0 flex-1 flex-col items-center justify-start gap-1 max-md:text-center">
             <p className="ds-text-small m-0 normal-case opacity-40">
               Tuesday–Thursday | Saturday:
             </p>

@@ -8,6 +8,7 @@ import gsap from "gsap"
 import { Tabs, TabsContent } from "@/components/ui/tabs"
 import MenuNav, { MenuImages, type MenuSectionMeta } from "./menuNav"
 import MenuSection from "./menuSection"
+import HappyHourSection from "./happyHourSection"
 import { initSal } from "@/utils/sal"
 
 const WineMenuInline = dynamic(() => import("./wineMenuInline"), {
@@ -24,6 +25,7 @@ type MenuItemRow = {
 type MenusData = {
   dinner?: { name?: string; image?: unknown }
   wine?: { name?: string; image?: unknown }
+  happyHour?: { name?: string; image?: unknown }
   warning?: string
 }
 
@@ -93,6 +95,13 @@ export default function MenuTabs({
       image: data?.dinner?.image,
     },
     {
+      id: "happy-hour",
+      title: data?.happyHour?.name ?? "Happy Hour",
+      staticSrc: "/images/happy-hour.svg",
+      imageContainerClassName:
+        "aspect-[325/214] w-[360px] max-md:w-[min(100%,280px)]",
+    },
+    {
       id: "wine-list",
       title: data?.wine?.name ?? "Wine List",
       image: data?.wine?.image,
@@ -112,6 +121,13 @@ export default function MenuTabs({
             className="mt-0 outline-none"
           >
             <MenuSection id="dinner-menu" items={dinnerItems} />
+          </TabsContent>
+          <TabsContent
+            id="menu-panel-happy-hour"
+            value="happy-hour"
+            className="mt-0 outline-none"
+          >
+            <HappyHourSection isActive={activeId === "happy-hour"} />
           </TabsContent>
           <TabsContent
             id="menu-panel-wine-list"

@@ -10,6 +10,10 @@ export type MenuSectionMeta = {
   id: string
   title?: string
   image?: unknown
+  /** Local asset path (e.g. `/images/happy-hour.svg`). Takes precedence over Sanity `image`. */
+  staticSrc?: string
+  /** Override the default 200×200 image container (e.g. wide wordmark). */
+  imageContainerClassName?: string
 }
 
 export function MenuImages({
@@ -19,24 +23,37 @@ export function MenuImages({
   sections: MenuSectionMeta[]
   activeId: string
 }) {
+  const activeSection = sections.find((s) => s.id === activeId)
+
   return (
-    <div className="ratio-1-1 relative mx-auto mb-40 w-[200px] max-md:mb-[60px]">
-      {sections.map((s) =>
-        s.image ? (
+    <div
+      className={cn(
+        "relative mx-auto mb-40 max-md:mb-[60px]",
+        activeSection?.imageContainerClassName ?? "ratio-1-1 w-[200px]",
+      )}
+    >
+      {sections.map((s) => {
+        const src = s.staticSrc ?? (s.image ? urlFor(s.image).url() : null)
+        if (!src) return null
+
+        const width = s.staticSrc ? 360 : 193
+        const height = s.staticSrc ? 237 : 176
+
+        return (
           <Image
             key={s.id}
             className={cn(
               "bg-image contain",
               s.id !== activeId && "hidden",
             )}
-            src={urlFor(s.image).url()}
+            src={src}
             alt={s.title ?? ""}
-            width={193}
-            height={176}
+            width={width}
+            height={height}
             unoptimized
           />
-        ) : null,
-      )}
+        )
+      })}
     </div>
   )
 }

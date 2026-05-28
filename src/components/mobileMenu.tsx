@@ -84,6 +84,13 @@ export default function MobileMenu({
             <button
               type="button"
               className={navLinkClass}
+              onClick={() => navigate("happy-hour")}
+            >
+              Happy Hour
+            </button>
+            <button
+              type="button"
+              className={navLinkClass}
               onClick={() => navigate("wine-list")}
             >
               Wine List
