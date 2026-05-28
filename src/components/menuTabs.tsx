@@ -109,8 +109,8 @@ export default function MenuTabs({
   ]
 
   return (
-    <>
-      <div className="h-[125px]" ref={menuNavRef} />
+    <div className="mt-32">
+      <div className="h-32" ref={menuNavRef} />
       <div className="menu-container relative" ref={menuContainerRef}>
         <MenuImages sections={sections} activeId={activeId} />
         <Tabs value={activeId} onValueChange={handleSelect}>
@@ -138,6 +138,6 @@ export default function MenuTabs({
           </TabsContent>
         </Tabs>
       </div>
-    </>
+    </div>
   )
 }

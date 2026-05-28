@@ -21,7 +21,7 @@ export default function FoodGallery({ data }: FoodGalleryProps) {
   const swiperRef = useRef<SwiperType | null>(null)
 
   return (
-    <div className="h-[480px] overflow-hidden md:h-[640px]">
+    <div className="mt-64 h-[480px] overflow-hidden md:h-[640px]">
       <Swiper
         loop
         centeredSlides

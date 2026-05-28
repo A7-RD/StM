@@ -2,7 +2,6 @@ import { sanityFetch } from "@/sanity/lib/live"
 import { getMenuItems } from "@/lib/menuItems"
 import Header from "@/components/header"
 import Hero from "@/components/hero"
-import Spacer from "@/components/spacer"
 import FoodGallery from "@/components/foodGallery"
 import MenuTabs from "@/components/menuTabs"
 import MenuFooter from "@/components/menuFooter"
@@ -41,20 +40,15 @@ export default async function Home() {
     <main>
       <Header data={data?.header} footerData={data?.footer} />
       <Hero data={data?.hero} />
-      <Spacer h={250} />
       <FoodGallery data={data?.foodGallery} />
-      <Spacer h={125} />
       <MenuTabs
         data={data?.menus}
         dinnerItems={dinnerItems}
         wineMenuUrl={wineMenuPdfSrc}
       />
       <MenuFooter warning={data?.menus?.warning} />
-      <Spacer h={300} />
       <ImageGallery data={data?.imageGallery} />
-      <Spacer h={120} hMobile={80} />
       <PianoLiveSection />
-      <Spacer h={120} hMobile={80} />
       <Footer data={data?.footer} />
     </main>
   )

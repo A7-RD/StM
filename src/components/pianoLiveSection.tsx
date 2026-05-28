@@ -3,7 +3,7 @@ import PianoKeysGraphic from "./pianoKeysGraphic"
 export default function PianoLiveSection() {
   return (
     <section
-      className="flex flex-col items-center px-10 max-md:px-[35px]"
+      className="mt-48 flex flex-col items-center px-10 max-md:mt-36 max-md:px-[35px]"
       aria-labelledby="piano-live-heading"
     >
       <div className="flex w-full max-w-[878px] flex-col items-center gap-8">
@@ -36,7 +36,7 @@ export default function PianoLiveSection() {
             </p>
             <p className="ds-title m-0">Lewis Henderson</p>
           </div>
-          <div className="flex min-w-0 flex-1 flex-col items-center justify-start gap-2 max-md:text-center">
+          <div className="flex min-w-0 flex-1 flex-col items-center justify-start gap-1 max-md:text-center">
             <p className="ds-text-small m-0 normal-case opacity-40">Friday:</p>
             <p className="ds-title m-0">Robert Brown</p>
           </div>

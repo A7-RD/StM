@@ -24,7 +24,7 @@ export default function ImageGallery({ data }: ImageGalleryProps) {
   }
 
   return (
-    <div className="mx-auto box-border w-full max-w-[400px] shrink-0 max-md:max-w-none max-md:px-[35px]">
+    <div className="mx-auto mt-32 box-border w-full max-w-[400px] shrink-0 max-md:mt-24 max-md:max-w-none max-md:px-[35px]">
       <Swiper
         slidesPerView={1}
         loop

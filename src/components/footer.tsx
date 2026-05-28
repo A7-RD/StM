@@ -67,7 +67,7 @@ function FooterAddress({ address }: { address?: Address }) {
 
 export default function Footer({ data }: { data?: FooterData }) {
   return (
-    <footer className="flex justify-between px-10 pb-10 max-md:flex-col">
+    <footer className="mt-48 flex justify-between px-10 pb-10 max-md:mt-36 max-md:flex-col">
       <div className="flex max-md:order-2 max-md:mt-12 flex-col justify-between capitalize">
         <div className="flex flex-col items-start gap-4">
           <div className="flex flex-col items-start gap-1">
