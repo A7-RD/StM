@@ -97,9 +97,9 @@ export default function MenuTabs({
     {
       id: "happy-hour",
       title: data?.happyHour?.name ?? "Happy Hour",
-      staticSrc: "/images/happy-hour.svg",
+      staticSrc: "/images/StM_HH.svg",
       imageContainerClassName:
-        "aspect-[325/214] w-[360px] max-md:w-[min(100%,280px)]",
+        "aspect-[321.54/210.46] w-[400px] max-md:w-[min(100%,300px)]",
     },
     {
       id: "wine-list",

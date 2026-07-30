@@ -10,7 +10,7 @@ export type MenuSectionMeta = {
   id: string
   title?: string
   image?: unknown
-  /** Local asset path (e.g. `/images/happy-hour.svg`). Takes precedence over Sanity `image`. */
+  /** Local asset path (e.g. `/images/StM_HH.svg`). Takes precedence over Sanity `image`. */
   staticSrc?: string
   /** Override the default 200×200 image container (e.g. wide wordmark). */
   imageContainerClassName?: string
@@ -36,8 +36,8 @@ export function MenuImages({
         const src = s.staticSrc ?? (s.image ? urlFor(s.image).url() : null)
         if (!src) return null
 
-        const width = s.staticSrc ? 360 : 193
-        const height = s.staticSrc ? 237 : 176
+        const width = s.staticSrc ? 400 : 193
+        const height = s.staticSrc ? 262 : 176
 
         return (
           <Image
