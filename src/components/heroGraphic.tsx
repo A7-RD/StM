@@ -4,10 +4,19 @@ import {
   useCallback,
   useEffect,
   useRef,
+  type CSSProperties,
   type RefObject,
 } from "react"
 
-import { HERO_SVG_MARKUP } from "./heroSvgMarkup"
+import {
+  HERO_BASE_OFFSET,
+  HERO_BASE_SVG,
+  HERO_HIGHLIGHT_LAYER_SVG,
+  HERO_MASK_IMAGE,
+  HERO_SHADOW_LAYER_SVG,
+  HERO_VIEW_HEIGHT,
+  HERO_VIEW_WIDTH,
+} from "./heroSvgMarkup"
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n))
@@ -37,43 +46,47 @@ function lightingDeltas(nx: number, ny: number) {
   }
 }
 
+const maskStyle: CSSProperties = {
+  maskImage: HERO_MASK_IMAGE,
+  maskSize: "100% 100%",
+  WebkitMaskImage: HERO_MASK_IMAGE,
+  WebkitMaskSize: "100% 100%",
+}
+
 type HeroGraphicProps = {
   heroRef?: RefObject<HTMLDivElement | null>
 }
 
 export default function HeroGraphic({ heroRef }: HeroGraphicProps) {
   const hostRef = useRef<HTMLDivElement | null>(null)
-  const shadowOffsetRef = useRef<SVGFEOffsetElement | null>(null)
-  const highlightOffsetRef = useRef<SVGFEOffsetElement | null>(null)
-  const baseShadowRef = useRef({ dx: 0, dy: 0 })
-  const baseHighlightRef = useRef({ dx: 0, dy: 0 })
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const shadowLayerRef = useRef<HTMLDivElement | null>(null)
+  const highlightLayerRef = useRef<HTMLDivElement | null>(null)
   const rectRef = useRef<DOMRect | null>(null)
+  const scaleRef = useRef(1)
   const targetRef = useRef({ dx: 0, dy: 0 })
   const currentRef = useRef({ dx: 0, dy: 0 })
   const rafRef = useRef(0)
   const motionEnabledRef = useRef(false)
 
-  useEffect(() => {
-    const svg = hostRef.current?.querySelector("svg")
-    if (!svg) return
+  // The blurred edge maps are static; lighting changes only translate them
+  // (a compositor-only operation), so no filter work happens per frame.
+  const applyOffsets = useCallback(() => {
+    const scale = scaleRef.current
+    const { dx, dy } = currentRef.current
 
-    const shadowEl = svg.querySelector(
-      'feOffset[data-role="shadow"]',
-    ) as SVGFEOffsetElement | null
-    const highlightEl = svg.querySelector(
-      'feOffset[data-role="highlight"]',
-    ) as SVGFEOffsetElement | null
-    shadowOffsetRef.current = shadowEl
-    highlightOffsetRef.current = highlightEl
-
-    function readBase(el: SVGFEOffsetElement | null) {
-      return {
-        dx: Number.parseFloat(el?.getAttribute("dx") ?? "0") || 0,
-        dy: Number.parseFloat(el?.getAttribute("dy") ?? "0") || 0,
-      }
+    const shadow = shadowLayerRef.current
+    if (shadow) {
+      const sx = dx * scale
+      const sy = (HERO_BASE_OFFSET + dy) * scale
+      shadow.style.transform = `translate3d(${sx.toFixed(2)}px, ${sy.toFixed(2)}px, 0)`
     }
-    baseShadowRef.current = readBase(shadowEl)
-    baseHighlightRef.current = readBase(highlightEl)
+    const highlight = highlightLayerRef.current
+    if (highlight) {
+      const hx = -dx * HIGHLIGHT_GAIN * scale
+      const hy = (-HERO_BASE_OFFSET - dy * HIGHLIGHT_GAIN) * scale
+      highlight.style.transform = `translate3d(${hx.toFixed(2)}px, ${hy.toFixed(2)}px, 0)`
+    }
   }, [])
 
   useEffect(() => {
@@ -84,6 +97,12 @@ export default function HeroGraphic({ heroRef }: HeroGraphicProps) {
       const node = heroRef?.current ?? hostRef.current
       if (!node) return
       rectRef.current = node.getBoundingClientRect()
+      const wrapper = wrapperRef.current
+      if (wrapper) {
+        const width = wrapper.getBoundingClientRect().width
+        if (width) scaleRef.current = width / HERO_VIEW_WIDTH
+      }
+      applyOffsets()
     }
 
     updateRect()
@@ -93,7 +112,7 @@ export default function HeroGraphic({ heroRef }: HeroGraphicProps) {
       window.removeEventListener("resize", updateRect)
       window.removeEventListener("scroll", updateRect)
     }
-  }, [heroRef])
+  }, [heroRef, applyOffsets])
 
   const ensureRaf = useCallback(() => {
     if (rafRef.current) return
@@ -112,20 +131,7 @@ export default function HeroGraphic({ heroRef }: HeroGraphicProps) {
       current.dx = settled ? target.dx : nextDx
       current.dy = settled ? target.dy : nextDy
 
-      const shadow = shadowOffsetRef.current
-      if (shadow) {
-        const baseShadow = baseShadowRef.current
-        shadow.setAttribute("dx", (baseShadow.dx + current.dx).toFixed(2))
-        shadow.setAttribute("dy", (baseShadow.dy + current.dy).toFixed(2))
-      }
-      const highlight = highlightOffsetRef.current
-      if (highlight) {
-        const baseHighlight = baseHighlightRef.current
-        const hdx = current.dx * HIGHLIGHT_GAIN
-        const hdy = current.dy * HIGHLIGHT_GAIN
-        highlight.setAttribute("dx", (baseHighlight.dx - hdx).toFixed(2))
-        highlight.setAttribute("dy", (baseHighlight.dy - hdy).toFixed(2))
-      }
+      applyOffsets()
 
       if (!settled) {
         rafRef.current = requestAnimationFrame(step)
@@ -133,7 +139,7 @@ export default function HeroGraphic({ heroRef }: HeroGraphicProps) {
     }
 
     rafRef.current = requestAnimationFrame(step)
-  }, [])
+  }, [applyOffsets])
 
   const resetToBaseline = useCallback(() => {
     targetRef.current = { dx: 0, dy: 0 }
@@ -306,7 +312,40 @@ export default function HeroGraphic({ heroRef }: HeroGraphicProps) {
     <div
       ref={hostRef}
       className="hero-logo flex max-w-[calc(100vw-35px)] flex-1 items-center max-md:absolute max-md:top-1/2 max-md:left-1/2 max-md:w-full max-md:max-w-[calc(100vw-50px)] max-md:-translate-x-1/2 max-md:-translate-y-1/2"
-      dangerouslySetInnerHTML={{ __html: HERO_SVG_MARKUP }}
-    />
+    >
+      <div
+        ref={wrapperRef}
+        className="relative"
+        style={{
+          // Explicit px width (not a % of the content-sized flex parent) so the
+          // wrapper has an intrinsic size; maxWidth handles responsive shrink.
+          width: `${HERO_VIEW_WIDTH}px`,
+          maxWidth: "100%",
+          aspectRatio: `${HERO_VIEW_WIDTH} / ${HERO_VIEW_HEIGHT}`,
+        }}
+      >
+        <div
+          className="absolute inset-0"
+          dangerouslySetInnerHTML={{ __html: HERO_BASE_SVG }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={maskStyle}
+        >
+          <div
+            ref={shadowLayerRef}
+            className="absolute inset-0 will-change-transform"
+            style={{ transform: `translate3d(0px, ${HERO_BASE_OFFSET}px, 0)` }}
+            dangerouslySetInnerHTML={{ __html: HERO_SHADOW_LAYER_SVG }}
+          />
+          <div
+            ref={highlightLayerRef}
+            className="absolute inset-0 will-change-transform"
+            style={{ transform: `translate3d(0px, ${-HERO_BASE_OFFSET}px, 0)` }}
+            dangerouslySetInnerHTML={{ __html: HERO_HIGHLIGHT_LAYER_SVG }}
+          />
+        </div>
+      </div>
+    </div>
   )
 }
