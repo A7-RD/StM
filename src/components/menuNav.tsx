@@ -24,6 +24,12 @@ export function MenuImages({
   activeId: string
 }) {
   const activeSection = sections.find((s) => s.id === activeId)
+  const activeSrc =
+    activeSection?.staticSrc ??
+    (activeSection?.image ? urlFor(activeSection.image).url() : null)
+
+  // Collapse when the active tab has no header art (e.g. Restaurant Week uses a full-bleed panel image).
+  if (!activeSrc) return null
 
   return (
     <div
