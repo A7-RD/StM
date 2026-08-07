@@ -151,7 +151,7 @@ export default function MenuTabs({
               className="flex justify-center px-8 pt-[60px] max-md:pt-10"
             >
               <Image
-                src="/images/Restaurant Week 2026 — Prix Fixe Menu@2x (1).webp"
+                src="/images/Restaurant Week 2026 — Prix Fixe Menu@2x (2).webp"
                 alt="Restaurant Week 2026 menu"
                 width={1056}
                 height={1632}
