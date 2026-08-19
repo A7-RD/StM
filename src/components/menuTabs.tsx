@@ -14,7 +14,7 @@ import MenuFooter from "./menuFooter"
 import { initSal } from "@/utils/sal"
 
 const HAPPY_HOUR_DISCLAIMER =
-  "For Happy Hour offerings, visit us at the bar—seating required"
+  "For Happy Hour offerings, visit us at the bar--seating required"
 
 const WineMenuInline = dynamic(() => import("./wineMenuInline"), {
   ssr: false,
