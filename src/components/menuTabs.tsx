@@ -10,7 +10,11 @@ import { Tabs, TabsContent } from "@/components/ui/tabs"
 import MenuNav, { MenuImages, type MenuSectionMeta } from "./menuNav"
 import MenuSection from "./menuSection"
 import HappyHourSection from "./happyHourSection"
+import MenuFooter from "./menuFooter"
 import { initSal } from "@/utils/sal"
+
+const HAPPY_HOUR_DISCLAIMER =
+  "For Happy Hour offerings, visit us at the bar—seating required"
 
 const WineMenuInline = dynamic(() => import("./wineMenuInline"), {
   ssr: false,
@@ -163,6 +167,11 @@ export default function MenuTabs({
           </TabsContent>
         </Tabs>
       </div>
+      <MenuFooter
+        warning={
+          activeId === "happy-hour" ? HAPPY_HOUR_DISCLAIMER : data?.warning
+        }
+      />
     </div>
   )
 }

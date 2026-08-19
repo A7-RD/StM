@@ -92,7 +92,7 @@ export default function Footer({ data }: { data?: FooterData }) {
             {data?.handle?.text}
           </a>
         </div>
-        <p className="ds-caption mt-0 text-left not-italic tracking-[-0.01em] opacity-40 max-md:mt-6">
+        <p className="ds-caption mt-0 text-left not-italic tracking-[-0.01em] max-md:mt-6">
           {data?.tagline}
         </p>
       </div>

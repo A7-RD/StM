@@ -4,7 +4,6 @@ import Header from "@/components/header"
 import Hero from "@/components/hero"
 import FoodGallery from "@/components/foodGallery"
 import MenuTabs from "@/components/menuTabs"
-import MenuFooter from "@/components/menuFooter"
 import ImageGallery from "@/components/imageGallery"
 import PianoLiveSection from "@/components/pianoLiveSection"
 import Footer from "@/components/footer"
@@ -46,7 +45,6 @@ export default async function Home() {
         dinnerItems={dinnerItems}
         wineMenuUrl={wineMenuPdfSrc}
       />
-      <MenuFooter warning={data?.menus?.warning} />
       <ImageGallery data={data?.imageGallery} />
       <PianoLiveSection />
       <Footer data={data?.footer} />

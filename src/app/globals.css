@@ -194,7 +194,7 @@
     --type-text-small-size: 0.875rem;
     --type-text-small-leading: 1.4;
 
-    --type-caption-size: 0.75rem;
+    --type-caption-size: 0.8125rem;
     --type-caption-leading: 1.4;
   }
 
@@ -248,6 +248,7 @@
     font-size: var(--type-caption-size);
     font-weight: 400;
     line-height: var(--type-caption-leading);
+    color: var(--color-ink);
   }
 }
 
