@@ -2,26 +2,14 @@
 
 import { useEffect, useRef, type CSSProperties, type ElementType, type ReactNode } from "react"
 
-import { happyHourDrinks, happyHourFood } from "@/data/happyHourMenu"
+import { formatHappyHourItem, happyHourMenu } from "@/data/happyHourMenu"
 import { cn } from "@/lib/utils"
 
-/** Stagger steps for top-to-bottom happy hour fade (matches design sequence). */
-const SAL = {
-  foodHeader: 0,
-  plates: 1,
-  specials: 2,
-  drinkHeaders: 3,
-  drinkRow: (index: number) => 4 + index,
+const COLUMN_CLASS = {
+  2: "grid-cols-1 sm:grid-cols-2",
+  3: "grid-cols-2 md:grid-cols-3",
+  4: "grid-cols-2 md:grid-cols-4",
 } as const
-
-const LAST_DRINK_ROW =
-  Math.max(
-    happyHourDrinks.wine.items.length,
-    happyHourDrinks.cocktails.items.length,
-    happyHourDrinks.beer.items.length,
-  ) - 1
-
-const drinkItemClass = "ds-text block leading-none text-ink"
 
 function HappyHourLine({
   as: Tag = "div",
@@ -41,53 +29,6 @@ function HappyHourLine({
     >
       {children}
     </Tag>
-  )
-}
-
-function HappyHourHeading({
-  children,
-  className,
-  salOrder,
-}: {
-  children: ReactNode
-  className?: string
-  salOrder: number
-}) {
-  return (
-    <HappyHourLine as="h3" salOrder={salOrder} className={cn("ds-subhead m-0 text-ink", className)}>
-      {children}
-    </HappyHourLine>
-  )
-}
-
-function HappyHourDrinkList({
-  header,
-  items,
-  listClassName,
-  itemClassName,
-}: {
-  header: string
-  items: readonly string[]
-  listClassName?: string
-  itemClassName?: string
-}) {
-  return (
-    <>
-      <HappyHourHeading salOrder={SAL.drinkHeaders}>{header}</HappyHourHeading>
-      <ul className={cn("m-0 flex w-full list-none flex-col gap-1 p-0", listClassName)}>
-        {items.map((item, index) => (
-          <li key={item}>
-            <HappyHourLine
-              as="span"
-              salOrder={SAL.drinkRow(index)}
-              className={cn(drinkItemClass, itemClassName)}
-            >
-              {item}
-            </HappyHourLine>
-          </li>
-        ))}
-      </ul>
-    </>
   )
 }
 
@@ -128,73 +69,47 @@ export default function HappyHourSection({ isActive = false }: HappyHourSectionP
     >
       <div
         ref={menuRef}
-        className="happy-hour-menu flex w-full max-w-[878px] flex-col gap-4 max-md:items-center max-md:gap-6 max-md:text-center"
+        className="happy-hour-menu flex w-full max-w-[640px] flex-col items-center gap-8 text-center"
       >
-        <div className="flex flex-col items-center gap-4 max-md:gap-2">
-          <HappyHourHeading salOrder={SAL.foodHeader} className="text-center">
-            {happyHourFood.header}
-          </HappyHourHeading>
+        {happyHourMenu.map((block, index) => {
+          const headerOrder = index * 2
+          const itemsOrder = index * 2 + 1
 
-          <HappyHourLine
-            as="ul"
-            salOrder={SAL.plates}
-            className="m-0 flex list-none flex-wrap items-center justify-center gap-2 p-0 max-md:flex-col max-md:gap-1"
-          >
-            {happyHourFood.plates.map((item) => (
-              <li key={item} className="ds-text leading-none text-ink">
-                {item}
-              </li>
-            ))}
-          </HappyHourLine>
-
-          <HappyHourLine
-            salOrder={SAL.specials}
-            className="flex w-full items-start gap-4 max-md:flex-col max-md:items-center max-md:gap-1"
-          >
-            {happyHourFood.specials.map((item) => (
-              <p
-                key={item}
-                className="ds-text m-0 flex-1 text-center leading-none text-ink"
+          return (
+            <div key={block.header} className="flex w-full flex-col items-center gap-3">
+              <HappyHourLine
+                as="h3"
+                salOrder={headerOrder}
+                className={cn(
+                  "ds-subhead m-0 text-ink",
+                  index === 0 && "max-md:mt-8",
+                )}
               >
-                {item}
-              </p>
-            ))}
-          </HappyHourLine>
-        </div>
+                {block.header}
+              </HappyHourLine>
 
-        <div className="flex w-full items-start justify-between gap-8 max-md:contents">
-          <div className="flex flex-col items-start gap-2 max-md:order-4 max-md:items-center">
-            <HappyHourDrinkList
-              header={happyHourDrinks.wine.header}
-              items={happyHourDrinks.wine.items}
-              listClassName="max-md:items-center"
-            />
-          </div>
-
-          <div className="flex flex-col items-start gap-2 max-md:order-2 max-md:items-center">
-            <HappyHourDrinkList
-              header={happyHourDrinks.cocktails.header}
-              items={happyHourDrinks.cocktails.items}
-              listClassName="items-center"
-            />
-          </div>
-
-          <div className="flex flex-col items-end gap-2 max-md:order-5 max-md:items-center">
-            <HappyHourDrinkList
-              header={happyHourDrinks.beer.header}
-              items={happyHourDrinks.beer.items}
-              listClassName="items-end max-md:items-center"
-              itemClassName="max-md:text-center md:text-right"
-            />
-          </div>
-        </div>
-
-        <HappyHourHeading
-          salOrder={SAL.drinkRow(LAST_DRINK_ROW + 1)}
-          className="max-md:order-3 text-center"
-        >
-          {happyHourDrinks.cocktails.footer}
-        </HappyHourHeading>
+              <HappyHourLine
+                as="ul"
+                salOrder={itemsOrder}
+                className={cn(
+                  "m-0 list-none gap-x-8 gap-y-2 p-0",
+                  block.columns
+                    ? cn("mx-auto grid w-fit justify-items-center", COLUMN_CLASS[block.columns])
+                    : cn(
+                        "flex flex-wrap items-center justify-center",
+                        block.compactWrap && "max-w-[520px]",
+                      ),
+                )}
+              >
+                {block.items.map((item) => (
+                  <li key={item.name} className="ds-text whitespace-nowrap leading-none text-ink">
+                    {formatHappyHourItem(item)}
+                  </li>
+                ))}
+              </HappyHourLine>
+            </div>
+          )
+        })}
       </div>
     </section>
   )

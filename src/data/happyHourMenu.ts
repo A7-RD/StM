@@ -1,42 +1,63 @@
-export const happyHourFood = {
-  header: "Food...$15",
-  plates: ["Escargots,", "Mussels,", "Steak Tartar,", "Shrimp St. Martins"],
-  specials: ["Bistro Burger...$21", "Steak Frites...$29"],
-} as const
+export type HappyHourItem = {
+  name: string
+  price?: string
+}
 
-export const happyHourDrinks = {
-  wine: {
+export type HappyHourBlock = {
+  header: string
+  items: readonly HappyHourItem[]
+  columns?: 2 | 3 | 4
+  compactWrap?: boolean
+}
+
+export const happyHourMenu: readonly HappyHourBlock[] = [
+  {
+    header: "H.H. Cocktails",
+    columns: 2,
+    items: [
+      { name: "Aperol Spritz", price: "$10" },
+      { name: "Old Fashioned", price: "$10" },
+      { name: "Champagne Cocktail", price: "$10" },
+      { name: "House Negroni", price: "$10" },
+      { name: "House Martini", price: "$10" },
+      { name: "Espresso Martini", price: "$12" },
+    ],
+  },
+  {
     header: "Wine...$10",
     items: [
-      "House Cabernet",
-      "House Sauv. Blanc",
-      "House Bordeaux",
-      "House Chardonnay",
-      "House Pinot Noir",
-      "House Sparkling",
+      { name: "House Red" },
+      { name: "House White" },
+      { name: "House Sparkling" },
+      { name: "House Rosé" },
     ],
   },
-  cocktails: {
-    header: "H.H. Cocktails...$10",
+  {
+    header: "Beers...$6",
+    columns: 3,
     items: [
-      "House Martini",
-      "Espresso Martini +$2",
-      "Aperol Spritz",
-      "Old Fashioned",
-      "Champagne Cocktail",
-      "House Negroni",
+      { name: "Stella Artois" },
+      { name: "Kronenbourg 1664" },
+      { name: "Community IPA" },
+      { name: "Negra Modelo" },
+      { name: "Miller Lite" },
+      { name: "Aval Blanc Cider" },
     ],
-    footer: "St.M Classics....$12",
   },
-  beer: {
-    header: "Beer...$6",
+  {
+    header: "Food",
+    compactWrap: true,
     items: [
-      "Stella Artois",
-      "Community IPA",
-      "Kronenbourg 1664",
-      "Negra Modelo",
-      "Miller Lite",
-      "Athletic Brewery",
+      { name: "Escargots", price: "$15" },
+      { name: "Mussels", price: "$15" },
+      { name: "Steak Tartar", price: "$15" },
+      { name: "Shrimp St. Martins", price: "$15" },
+      { name: "Bistro Burger", price: "$21" },
+      { name: "Steak Frites", price: "$29" },
     ],
   },
-} as const
+]
+
+export function formatHappyHourItem({ name, price }: HappyHourItem) {
+  return price ? `${name}...${price}` : name
+}
