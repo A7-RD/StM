@@ -17,8 +17,7 @@ const PAGE_QUERY = `{
   "footer": *[_type == "footer"][0] {
     ...,
     "hours": coalesce(hours, *[_type == "header"][0].hours)
-  },
-  "wineMenu": *[_type == "wineMenu"][0]{ "fileUrl": menu.asset->url }
+  }
 }`
 
 export const revalidate = 300
@@ -29,11 +28,7 @@ export default async function Home() {
     getMenuItems("Dinner Menu"),
   ])
 
-  const wineFileUrl = data?.wineMenu?.fileUrl
-  const wineMenuPdfSrc =
-    wineFileUrl != null
-      ? `/api/wine-menu-pdf?url=${encodeURIComponent(wineFileUrl)}`
-      : undefined
+  const wineMenuPdfSrc = "/wine-list.pdf"
 
   return (
     <main>
