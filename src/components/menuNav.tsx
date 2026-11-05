@@ -28,7 +28,7 @@ export function MenuImages({
     activeSection?.staticSrc ??
     (activeSection?.image ? urlFor(activeSection.image).url() : null)
 
-  // Collapse when the active tab has no header art (e.g. Restaurant Week uses a full-bleed panel image).
+  // Collapse when the active tab has no header art.
   if (!activeSrc) return null
 
   return (

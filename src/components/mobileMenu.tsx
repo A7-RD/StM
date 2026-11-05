@@ -95,13 +95,6 @@ export default function MobileMenu({
             >
               Wine List
             </button>
-            <button
-              type="button"
-              className={navLinkClass}
-              onClick={() => navigate("restaurant-week")}
-            >
-              Restaurant Week
-            </button>
           </nav>
           <Button
             variant="reservation"

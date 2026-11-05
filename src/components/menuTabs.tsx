@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import dynamic from "next/dynamic"
-import Image from "next/image"
 import { useLenis } from "lenis/react"
 import gsap from "gsap"
 
@@ -111,10 +110,6 @@ export default function MenuTabs({
       title: data?.wine?.name ?? "Wine List",
       image: data?.wine?.image,
     },
-    {
-      id: "restaurant-week",
-      title: "Restaurant Week",
-    },
   ]
 
   return (
@@ -144,26 +139,6 @@ export default function MenuTabs({
             className="mt-0 outline-none"
           >
             <WineMenuInline pdfUrl={wineMenuUrl} />
-          </TabsContent>
-          <TabsContent
-            id="menu-panel-restaurant-week"
-            value="restaurant-week"
-            className="mt-0 outline-none"
-          >
-            <section
-              id="restaurant-week"
-              className="flex justify-center px-8 pt-[60px] max-md:pt-10"
-            >
-              <Image
-                src="/images/Restaurant Week 2026 — Prix Fixe Menu@2x (2).webp"
-                alt="Restaurant Week 2026 menu"
-                width={1056}
-                height={1632}
-                className="h-auto w-full max-w-[520px]"
-                unoptimized
-                priority
-              />
-            </section>
           </TabsContent>
         </Tabs>
       </div>
